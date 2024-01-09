@@ -8,6 +8,19 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+  web:
+    build: .
+    environment:
+      - PHX_HOST=0.0.0.0
+      - PORT=8080
+      - DATABASE_URL=ecto://postgres:mypassword@db:5432/ptodo_dev
+      - SECRET_KEY_BASE=hcrAaMkjaYc1FzbG6GohRBT2l+ACLJw1X63WcwlH33c2P8SMR42jWPOD9SVgqAPE
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+
 
 volumes:
   pgdata:
